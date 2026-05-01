@@ -1,0 +1,26 @@
+model Product {
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+  price       Decimal @db.Decimal(10, 2)
+  stock       Int     @default(0)
+  sku         String  @unique
+  imageUrl    String? @map("image_url")
+  isActive    Boolean @default(true) @map("is_active")
+
+  // 1:N
+  orderItems OrderItem[]
+  cartItems  CartItem[]
+
+  // 1:1
+  categoryId String   @map("category_id")
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([sku])
+  @@index([categoryId])
+  @@index([isActive])
+  @@map("products")
+}
