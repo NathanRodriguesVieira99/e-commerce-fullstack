@@ -1,0 +1,20 @@
+pre-commit:
+  commands:
+    check:
+      run: pnpm format {staged_files}
+      glob: '*.{js,jsx,.mjs,,ts,tsx,mts,css,json,md}'
+      stage_fixed: true
+
+pre-push:
+  commands:
+    validate:
+      glob: '*.{ts,tsx,js,jsx}'
+      run: pnpm typecheck
+
+    lint:
+      glob: '*.{ts,tsx,js,jsx}'
+      run: pnpm lint
+      
+    test:
+      glob: '*.{ts,tsx,js,jsx}'
+      run: pnpm test:cov
