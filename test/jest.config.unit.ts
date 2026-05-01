@@ -15,7 +15,7 @@ const config = defineConfig({
 
   moduleNameMapper: { '^@/(.*)$': '<rootDir>/src/$1' },
 
-  coverageDirectory: './coverage/unit',
+  coverageDirectory: '<rootDir>/coverage/unit',
   coverageReporters: ['text', 'html', 'lcov', 'cobertura'],
   collectCoverageFrom: [
     'src/**/*.ts',
@@ -32,7 +32,7 @@ const config = defineConfig({
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',
     '<rootDir>/.next/',
-    '<rootDir>/e2e/',
+    '<rootDir>/test/e2e/',
   ],
 });
 
