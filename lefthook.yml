@@ -14,7 +14,7 @@ pre-push:
     lint:
       glob: '*.{ts,tsx,js,jsx}'
       run: pnpm lint
-      
+
     test:
       glob: '*.{ts,tsx,js,jsx}'
-      run: pnpm test:cov
+      run: pnpm test:unit:cov
