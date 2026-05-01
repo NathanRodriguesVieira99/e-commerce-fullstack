@@ -2,9 +2,15 @@ import { defineConfig } from 'jest';
 
 const config = defineConfig({
   displayName: 'unit',
-  testMatch: ['**/*.{spec,test}.ts'],
-  rootDir: './',
+  testMatch: [
+    '**/test/**/*.test.ts',
+    '**/__tests__/**/*.test.ts',
+    '**/?(*.)+(spec|test).ts',
+  ],
+  rootDir: '../',
   testEnvironment: 'node',
+  preset: 'ts-jest',
+  maxWorkers: '50%',
 
   testTimeout: 10000,
 
@@ -13,7 +19,10 @@ const config = defineConfig({
   resetMocks: true,
   restoreMocks: true,
 
-  moduleNameMapper: { '^@/(.*)$': '<rootDir>/src/$1' },
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '^(\\.{1,2}/.*)\\.js$': '$1',
+  },
 
   coverageDirectory: '<rootDir>/coverage/unit',
   coverageReporters: ['text', 'html', 'lcov', 'cobertura'],
@@ -28,11 +37,21 @@ const config = defineConfig({
     '!src/**/*.guard.ts',
     '!src/**/*.decorator.ts',
     '!src/main.ts',
+    '!src/database/generated/*',
   ],
+  // coverageThreshold: {
+  //   global: {
+  //     branches: 80,
+  //     functions: 80,
+  //     lines: 80,
+  //     statements: 80,
+  //   },
+  // },
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',
     '<rootDir>/.next/',
     '<rootDir>/test/e2e/',
+    '<rootDir>/src/database/generated/',
   ],
 });
 

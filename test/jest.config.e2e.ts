@@ -2,15 +2,24 @@ import { defineConfig } from 'jest';
 
 const config = defineConfig({
   displayName: 'e2e',
-  testMatch: ['**/*.{e2e-spec,e2e-test}.ts'],
-  rootDir: './',
+  testMatch: [
+    '**/test/**/*.test.ts',
+    '**/__tests__/**/*.test.ts',
+    '**/?(*.)+(e2e-spec|e2e-test).ts',
+  ],
+  rootDir: '../',
   testEnvironment: 'node',
+  preset: 'ts-jest',
+  maxWorkers: '50%',
 
   testTimeout: 30000,
 
   verbose: true,
 
-  moduleNameMapper: { '^@/(.*)$': '<rootDir>/src/$1' },
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '^(\\.{1,2}/.*)\\.js$': '$1',
+  },
 
   coverageDirectory: './coverage/e2e',
   coverageReporters: ['text', 'html', 'lcov', 'cobertura'],
