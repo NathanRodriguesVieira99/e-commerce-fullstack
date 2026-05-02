@@ -31,6 +31,7 @@ const config = defineConfig({
     '!src/**/types/**',
     '!src/**/*.d.ts',
     '!src/**/*.module.ts',
+    '!src/**/*.dto.ts',
     '!src/**/*.guard.ts',
     '!src/**/*.decorator.ts',
     '!src/main.ts',

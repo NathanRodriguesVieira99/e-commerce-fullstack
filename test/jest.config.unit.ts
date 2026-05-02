@@ -33,6 +33,7 @@ const config = defineConfig({
     '!src/**/*.e2e-spec.ts',
     '!src/**/types/**',
     '!src/**/*.d.ts',
+    '!src/**/*.dto.ts',
     '!src/**/*.module.ts',
     '!src/**/*.guard.ts',
     '!src/**/*.decorator.ts',
