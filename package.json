@@ -17,6 +17,7 @@
     "test:unit:watch": "jest --watch --config ./test/jest.config.unit.ts",
     "test:unit:cov": "jest --coverage --config ./test/jest.config.unit.ts",
     "test:e2e": "jest --config ./test/jest.config.e2e.ts",
+    "test:e2e:cov": "jest --coverage --config ./test/jest.config.e2e.ts",
     "db:migrate": "prisma migrate dev",
     "db:gen": "prisma generate"
   },
