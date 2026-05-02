@@ -12,7 +12,7 @@ export class DatabaseService
   extends PrismaClient
   implements OnModuleInit, OnModuleDestroy
 {
-  private logger = new Logger('Database');
+  private logger = new Logger(DatabaseService.name);
 
   constructor() {
     const adapter = new PrismaPg({ connectionString });
