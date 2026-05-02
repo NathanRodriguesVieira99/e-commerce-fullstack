@@ -18,3 +18,7 @@ pre-push:
     test:
       glob: '*.{ts,tsx,js,jsx}'
       run: pnpm test:unit:cov
+
+    test:e2e:
+      glob: '*.{ts,tsx,js,jsx}'
+      run: pnpm test:e2e:cov
