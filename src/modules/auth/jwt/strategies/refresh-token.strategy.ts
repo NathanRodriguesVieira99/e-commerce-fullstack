@@ -1,6 +1,6 @@
 import { Request } from 'express';
 
-import { BadRequestException, Logger } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 
@@ -9,6 +9,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { DatabaseService } from '@/database/database.service';
 import { compare } from 'bcrypt';
 
+@Injectable()
 export class RefreshTokenStrategy extends PassportStrategy(
   Strategy,
   'jwt-refresh',
@@ -26,7 +27,7 @@ export class RefreshTokenStrategy extends PassportStrategy(
   }
 
   async validate(req: Request, payload: { sub: string; email: string }) {
-    const logger = new Logger('JWT');
+    const logger = new Logger(RefreshTokenStrategy.name);
 
     logger.log('RefreshTokenStrategy.validate called');
     logger.log(`Payload, sub:${payload.sub} email:${payload.email}`);
