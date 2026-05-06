@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
 
+import { ROLE } from '@/database/generated/enums';
 import { ROLES_KEY } from '../decorators/role.decorator';
 
-import type { ROLE } from '@/database/generated/enums';
 import type { CanActivate, ExecutionContext } from '@nestjs/common';
-import type { Reflector } from '@nestjs/core';
 
 @Injectable()
 export class RoleGuard implements CanActivate {
@@ -13,7 +13,7 @@ export class RoleGuard implements CanActivate {
   canActivate(context: ExecutionContext): boolean {
     const requiredRoles = this.reflector.getAllAndOverride<ROLE[]>(ROLES_KEY, [
       context.getHandler(),
-      context.getClass,
+      context.getClass(),
     ]);
 
     if (!requiredRoles) return true;
