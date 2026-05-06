@@ -1,24 +1,29 @@
 pre-commit:
   commands:
     check:
+      root: backend/
       run: pnpm format {staged_files}
-      glob: '*.{js,jsx,.mjs,,ts,tsx,mts,css,json,md}'
+      glob: "*.{js,jsx,.mjs,,ts,tsx,mts,css,json,md}"
       stage_fixed: true
 
 pre-push:
   commands:
     validate:
-      glob: '*.{ts,tsx,js,jsx}'
+      root: backend/
+      glob: "*.{ts,tsx,js,jsx}"
       run: pnpm typecheck
 
     lint:
-      glob: '*.{ts,tsx,js,jsx}'
+      root: backend/
+      glob: "*.{ts,tsx,js,jsx}"
       run: pnpm lint
 
     unit tests:
-      glob: '*.{ts,tsx,js,jsx}'
+      root: backend/
+      glob: "*.{ts,tsx,js,jsx}"
       run: pnpm test:unit:cov
 
     e2e tests:
-      glob: '*.{ts,tsx,js,jsx}'
+      root: backend/
+      glob: "*.{ts,tsx,js,jsx}"
       run: pnpm test:e2e:cov
