@@ -7,6 +7,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ZodResponse } from 'nestjs-zod';
 
 import { AuthService } from './auth.service';
 
@@ -29,7 +30,7 @@ export class AuthController {
     summary: 'Register a new user',
     description: 'Creates a new user account',
   })
-  @ApiResponse({
+  @ZodResponse({
     status: HttpStatus.CREATED,
     description: 'user successfully registered',
     type: AuthResponseDto,
@@ -67,14 +68,10 @@ export class AuthController {
     summary: 'User login',
     description: 'Authenticates a user and returns access and refresh tokens',
   })
-  @ApiResponse({
+  @ZodResponse({
     status: HttpStatus.CREATED,
     description: 'user successfully logged in',
     type: AuthResponseDto,
-  })
-  @ApiResponse({
-    status: HttpStatus.TOO_MANY_REQUESTS,
-    description: 'Too many requests. Rate limit exceeded',
   })
   @ApiResponse({
     status: HttpStatus.TOO_MANY_REQUESTS,
@@ -92,7 +89,7 @@ export class AuthController {
     summary: 'Refresh access token',
     description: 'Generates a new access token using a valid refresh token',
   })
-  @ApiResponse({
+  @ZodResponse({
     status: HttpStatus.CREATED,
     description: 'New access token successfully generated',
     type: AuthResponseDto,
