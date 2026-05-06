@@ -4,6 +4,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { AppModule } from './app.module';
 
+import { cleanupOpenApiDoc } from 'nestjs-zod';
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
@@ -59,7 +61,7 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
 
-  SwaggerModule.setup('docs', app, document, {
+  SwaggerModule.setup('docs', app, cleanupOpenApiDoc(document), {
     swaggerOptions: {
       persistAuthorization: true,
       tagsSorter: 'alpha',
