@@ -3,6 +3,7 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 import {
@@ -19,6 +20,8 @@ import { RoleGuard } from '@/shared/guards/role.guard';
 
 import { UserResponseDto } from './dtos/user-response.dto';
 
+import type { RequestWithUser } from '@/shared/interfaces/request-with-user.interface';
+
 @Controller('users')
 @UseGuards(JwtAuthGuard, RoleGuard)
 @ApiTags('users')
@@ -34,5 +37,11 @@ export class UsersController {
     description: 'Current user',
     type: UserResponseDto,
   })
-  async getProfile() {}
+  @ApiResponse({
+    status: HttpStatus.UNAUTHORIZED,
+    description: 'Unauthorized',
+  })
+  async getProfile(@Req() req: RequestWithUser): Promise<UserResponseDto> {
+    return await this.usersService.getProfile(req.user.id);
+  }
 }
